@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "tpsoverlay",
+  "version": "${version}",
+  "name": "TPS Overlay",
+  "description": "Configurable on-screen TPS, MSPT, ping and FPS overlay.",
+  "authors": [
+    "stool"
+  ],
+  "license": "MIT",
+  "icon": "assets/tpsoverlay/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.stool.tpsoverlay.TpsOverlayMod"
+    ],
+    "client": [
+      "com.stool.tpsoverlay.client.TpsOverlayClient"
+    ],
+    "modmenu": [
+      "com.stool.tpsoverlay.client.TpsOverlayModMenuImpl"
+    ]
+  },
+  "mixins": [
+    "tpsoverlay.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.18.6",
+    "minecraft": "26.1.2",
+    "java": ">=25",
+    "fabric-api": "*"
+  }
+}
