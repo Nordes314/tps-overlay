@@ -10,6 +10,7 @@ public class TpsOverlayConfig {
     @SerialEntry public boolean centerAnchor = false;
     @SerialEntry public boolean colorEnabled = true;
     @SerialEntry public int pollIntervalMs = 250;
+    @SerialEntry public boolean estimateClientTps = true;
     @SerialEntry public TpsWindow tpsWindow = TpsWindow.FIVE_SECONDS;
     @SerialEntry public float textScale = 1.0f;
     @SerialEntry public boolean backgroundEnabled = true;

@@ -28,6 +28,8 @@
   "tpsoverlay.config.option.graph_center_x": "Центр графика по горизонтали",
   "tpsoverlay.config.option.graph_center_y": "Центр графика по вертикали",
   "tpsoverlay.config.option.poll_interval": "Интервал опроса (мс)",
+  "tpsoverlay.config.option.estimate_client_tps": "Оценка TPS без мода на сервере",
+  "tpsoverlay.config.option.estimate_client_tps.desc": "Приблизительный TPS/MSPT по пакетам синхронизации времени, если на сервере нет мода. Значения с префиксом ~",
   "tpsoverlay.config.option.tps_window": "Окно TPS по умолчанию",
   "tpsoverlay.config.option.tps_window.desc": "Какое скользящее среднее использует {tps}",
   "tpsoverlay.config.option.hide_in_menus": "Скрывать в меню",

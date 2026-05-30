@@ -6,6 +6,9 @@
   "mixins": [
     "MinecraftServerMixin"
   ],
+  "client": [
+    "client.ClientboundSetTimePacketMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   }

@@ -64,26 +64,29 @@ public final class FormatRenderer {
     }
 
     private static Component renderTps(TpsOverlayConfig config, float value) {
-        if (!ClientMetricsState.hasServerMetrics()) {
+        if (!ClientMetricsState.hasAnyMetrics() || Float.isNaN(value)) {
             return Component.literal("N/A").withStyle(ChatFormatting.GRAY);
         }
-        return MetricsUtil.coloredTps(value, config.colorEnabled);
+        MutableComponent core = MetricsUtil.coloredTps(value, config.colorEnabled);
+        if (ClientMetricsState.isEstimated()) {
+            return Component.literal("~").withStyle(ChatFormatting.GRAY).append(core);
+        }
+        return core;
     }
 
     private static Component renderMspt(TpsOverlayConfig config, float value) {
-        if (!ClientMetricsState.hasServerMetrics()) {
+        if (!ClientMetricsState.hasAnyMetrics() || Float.isNaN(value)) {
             return Component.literal("N/A").withStyle(ChatFormatting.GRAY);
         }
-        return MetricsUtil.coloredMspt(value, config.colorEnabled);
+        MutableComponent core = MetricsUtil.coloredMspt(value, config.colorEnabled);
+        if (ClientMetricsState.isEstimated()) {
+            return Component.literal("~").withStyle(ChatFormatting.GRAY).append(core);
+        }
+        return core;
     }
 
     private static float selectedTps(TpsOverlayConfig config) {
-        return switch (config.tpsWindow) {
-            case FIVE_SECONDS -> ClientMetricsState.tps5s();
-            case ONE_MINUTE -> ClientMetricsState.tps1m();
-            case FIVE_MINUTES -> ClientMetricsState.tps5m();
-            case FIFTEEN_MINUTES -> ClientMetricsState.tps15m();
-        };
+        return ClientMetricsState.tpsForWindow(config.tpsWindow);
     }
 
     private static int readPing() {

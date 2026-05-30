@@ -57,7 +57,7 @@ public final class MetricsHistory {
 
         pushSample(
             readTps(config),
-            ClientMetricsState.hasServerMetrics() ? ClientMetricsState.mspt() : Float.NaN,
+            ClientMetricsState.hasAnyMetrics() ? ClientMetricsState.mspt() : Float.NaN,
             Minecraft.getInstance().getFps(),
             readPing()
         );
@@ -106,15 +106,10 @@ public final class MetricsHistory {
     }
 
     private static float readTps(TpsOverlayConfig config) {
-        if (!ClientMetricsState.hasServerMetrics()) {
+        if (!ClientMetricsState.hasAnyMetrics()) {
             return Float.NaN;
         }
-        return switch (config.tpsWindow) {
-            case FIVE_SECONDS -> ClientMetricsState.tps5s();
-            case ONE_MINUTE -> ClientMetricsState.tps1m();
-            case FIVE_MINUTES -> ClientMetricsState.tps5m();
-            case FIFTEEN_MINUTES -> ClientMetricsState.tps15m();
-        };
+        return ClientMetricsState.tpsForWindow(config.tpsWindow);
     }
 
     private static float readPing() {

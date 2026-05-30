@@ -28,6 +28,8 @@
   "tpsoverlay.config.option.graph_center_x": "Graph horizontal center",
   "tpsoverlay.config.option.graph_center_y": "Graph vertical center",
   "tpsoverlay.config.option.poll_interval": "Poll interval (ms)",
+  "tpsoverlay.config.option.estimate_client_tps": "Estimate TPS without server mod",
+  "tpsoverlay.config.option.estimate_client_tps.desc": "Approximate TPS/MSPT from time-sync packets when the server does not run this mod. Values are prefixed with ~",
   "tpsoverlay.config.option.tps_window": "Default TPS window",
   "tpsoverlay.config.option.tps_window.desc": "Which rolling average {tps} uses",
   "tpsoverlay.config.option.hide_in_menus": "Hide in menus",

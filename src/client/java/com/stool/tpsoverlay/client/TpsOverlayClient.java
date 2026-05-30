@@ -38,6 +38,7 @@ public class TpsOverlayClient implements ClientModInitializer {
             context.client().execute(() -> handleClientAction(payload.action())));
 
         ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> ClientMetricsState.onDisconnect());
+        ClientPlayConnectionEvents.JOIN.register((handler, sender, client) -> ClientMetricsState.onJoin());
 
         ClientPreAttackCallback.EVENT.register((client, player, clickCount) ->
             OverlayDragHandler.shouldCaptureMouse(client));

@@ -89,6 +89,8 @@ public final class TpsOverlayConfigScreens {
                 .name(Component.translatable("tpsoverlay.config.category.performance"))
                 .option(intSlider("tpsoverlay.config.option.poll_interval", handler.defaults().pollIntervalMs,
                     () -> handler.instance().pollIntervalMs, v -> handler.instance().pollIntervalMs = v, 50, 2000))
+                .option(boolOption("tpsoverlay.config.option.estimate_client_tps", handler.defaults().estimateClientTps,
+                    () -> handler.instance().estimateClientTps, v -> handler.instance().estimateClientTps = v))
                 .option(tpsWindowOption())
                 .build())
             .category(ConfigCategory.createBuilder()
