@@ -6,6 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.ChatScreen;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.ARGB;
 import net.minecraft.util.Mth;
@@ -168,16 +169,17 @@ public final class TpsOverlayHud {
     }
 
     static boolean shouldHide(Minecraft minecraft, TpsOverlayConfig config) {
-        if (config.hideInMenus && minecraft.screen != null && !(minecraft.screen instanceof ChatScreen)) {
+        Screen screen = minecraft.gui.screen();
+        if (config.hideInMenus && screen != null && !(screen instanceof ChatScreen)) {
             return true;
         }
-        if (config.hideWhenChatOpen && minecraft.screen instanceof ChatScreen) {
+        if (config.hideWhenChatOpen && screen instanceof ChatScreen) {
             return true;
         }
         if (config.hideWithF3 && minecraft.getDebugOverlay().showDebugScreen()) {
             return true;
         }
-        if (config.hideInCinematic && minecraft.options.hideGui) {
+        if (config.hideInCinematic && minecraft.options.keyToggleGui.isDown()) {
             return true;
         }
         return false;

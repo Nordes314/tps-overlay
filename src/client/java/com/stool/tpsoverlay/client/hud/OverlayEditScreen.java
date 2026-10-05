@@ -72,7 +72,7 @@ public final class OverlayEditScreen extends Screen {
     void cancelWithoutSave() {
         revertPosition();
         if (minecraft != null) {
-            minecraft.setScreen(null);
+            minecraft.setScreenAndShow(null);
         }
     }
 
@@ -177,7 +177,7 @@ public final class OverlayEditScreen extends Screen {
     private void saveAndClose() {
         TpsOverlayConfigHandler.save();
         if (minecraft != null) {
-            minecraft.setScreen(null);
+            minecraft.setScreenAndShow(null);
         }
     }
 

@@ -49,19 +49,27 @@ public final class OverlayWidgets {
     }
 
     static void ensureMigrated(TpsOverlayConfig config, OverlayWidgetKind kind, int contentWidth, int contentHeight, int screenWidth, int screenHeight) {
-        if (centerAnchor(config, kind) || screenWidth <= 0 || screenHeight <= 0) {
+        if (screenWidth <= 0 || screenHeight <= 0) {
             return;
         }
 
         float anchorX = centerX(config, kind);
         float anchorY = centerY(config, kind);
-        setCenter(
-            config,
-            kind,
-            anchorX + contentWidth / (2.0f * screenWidth),
-            anchorY + contentHeight / (2.0f * screenHeight)
-        );
-        setCenterAnchor(config, kind, true);
+        float centerX = centerAnchor(config, kind)
+            ? OverlayPosition.clampCenterX(anchorX, contentWidth, screenWidth)
+            : OverlayPosition.clampCenterX(anchorX + contentWidth / (2.0f * screenWidth), contentWidth, screenWidth);
+        float centerY = centerAnchor(config, kind)
+            ? OverlayPosition.clampCenterY(anchorY, contentHeight, screenHeight)
+            : OverlayPosition.clampCenterY(anchorY + contentHeight / (2.0f * screenHeight), contentHeight, screenHeight);
+
+        if (centerAnchor(config, kind) && centerX == anchorX && centerY == anchorY) {
+            return;
+        }
+
+        setCenter(config, kind, centerX, centerY);
+        if (!centerAnchor(config, kind)) {
+            setCenterAnchor(config, kind, true);
+        }
         TpsOverlayConfigHandler.save();
     }
 

@@ -16,7 +16,6 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.hud.VanillaHudElements;
 import net.fabricmc.fabric.api.event.client.player.ClientPreAttackCallback;
 import net.minecraft.resources.Identifier;
 
@@ -25,8 +24,7 @@ public class TpsOverlayClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        HudElementRegistry.attachElementBefore(
-            VanillaHudElements.CHAT,
+        HudElementRegistry.addLast(
             HUD_ID,
             (graphics, delta) -> TpsOverlayHud.render(graphics, delta.getGameTimeDeltaPartialTick(false))
         );
@@ -60,7 +58,7 @@ public class TpsOverlayClient implements ClientModInitializer {
             case OPEN_CONFIG -> {
                 var minecraft = net.minecraft.client.Minecraft.getInstance();
                 if (minecraft.player != null) {
-                    minecraft.setScreen(TpsOverlayConfigScreens.create(null));
+                    minecraft.setScreenAndShow(TpsOverlayConfigScreens.create(null));
                 }
             }
             case RESET_POSITION -> {
